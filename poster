@@ -1,0 +1,2812 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "user-post",
+    "version": "0.0.1",
+    "description": "generate app api users with posts and comments",
+    "contact": {
+      "name": "hazemSaeed",
+      "email": "hazemalb96@gmail.com"
+    }
+  },
+  "paths": {
+    "/comments/count": {
+      "get": {
+        "x-controller-name": "CommentController",
+        "x-operation-name": "count",
+        "tags": [
+          "CommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Comment.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Comment>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "CommentController.count"
+      }
+    },
+    "/comments/{id}/post": {
+      "get": {
+        "x-controller-name": "CommentPostController",
+        "x-operation-name": "getPost",
+        "tags": [
+          "CommentPostController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Post belonging to Comment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "CommentPostController.getPost"
+      }
+    },
+    "/comments/{id}/user": {
+      "get": {
+        "x-controller-name": "CommentUserController",
+        "x-operation-name": "getUser",
+        "tags": [
+          "CommentUserController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User belonging to Comment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "CommentUserController.getUser"
+      }
+    },
+    "/comments/{id}": {
+      "put": {
+        "x-controller-name": "CommentController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "CommentController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Comment PUT success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "CommentController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "CommentController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "CommentController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Comment PATCH success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "CommentController.updateById"
+      },
+      "get": {
+        "x-controller-name": "CommentController",
+        "x-operation-name": "findById",
+        "tags": [
+          "CommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "CommentController.findById"
+      },
+      "delete": {
+        "x-controller-name": "CommentController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "CommentController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Comment DELETE success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "CommentController.deleteById"
+      }
+    },
+    "/comments": {
+      "post": {
+        "x-controller-name": "CommentController",
+        "x-operation-name": "create",
+        "tags": [
+          "CommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewComment"
+              }
+            }
+          }
+        },
+        "operationId": "CommentController.create"
+      },
+      "patch": {
+        "x-controller-name": "CommentController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "CommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Comment.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Comment>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentPartial"
+              }
+            }
+          }
+        },
+        "operationId": "CommentController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "CommentController",
+        "x-operation-name": "find",
+        "tags": [
+          "CommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Comment model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommentWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "CommentController.find"
+      }
+    },
+    "/ping": {
+      "get": {
+        "x-controller-name": "PingController",
+        "x-operation-name": "ping",
+        "tags": [
+          "PingController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ping Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PingResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "PingController.ping"
+      }
+    },
+    "/posts/count": {
+      "get": {
+        "x-controller-name": "PostController",
+        "x-operation-name": "count",
+        "tags": [
+          "PostController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Post model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Post.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Post>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PostController.count"
+      }
+    },
+    "/posts/{id}/comments": {
+      "post": {
+        "x-controller-name": "PostCommentController",
+        "x-operation-name": "create",
+        "tags": [
+          "PostCommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Post model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCommentInPost"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PostCommentController.create"
+      },
+      "patch": {
+        "x-controller-name": "PostCommentController",
+        "x-operation-name": "patch",
+        "tags": [
+          "PostCommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Post.Comment PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Comment.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Comment>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PostCommentController.patch"
+      },
+      "get": {
+        "x-controller-name": "PostCommentController",
+        "x-operation-name": "find",
+        "tags": [
+          "PostCommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Post has many Comment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Comment"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PostCommentController.find"
+      },
+      "delete": {
+        "x-controller-name": "PostCommentController",
+        "x-operation-name": "delete",
+        "tags": [
+          "PostCommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Post.Comment DELETE success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Comment.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Comment>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PostCommentController.delete"
+      }
+    },
+    "/posts/{id}/user": {
+      "get": {
+        "x-controller-name": "PostUserController",
+        "x-operation-name": "getUser",
+        "tags": [
+          "PostUserController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User belonging to Post",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PostUserController.getUser"
+      }
+    },
+    "/posts/{id}": {
+      "put": {
+        "x-controller-name": "PostController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PostController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Post PUT success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Post"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PostController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PostController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PostController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Post PATCH success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PostController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PostController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PostController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Post model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PostController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PostController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PostController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Post DELETE success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PostController.deleteById"
+      }
+    },
+    "/posts": {
+      "post": {
+        "x-controller-name": "PostController",
+        "x-operation-name": "create",
+        "tags": [
+          "PostController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Post model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPost"
+              }
+            }
+          }
+        },
+        "operationId": "PostController.create"
+      },
+      "patch": {
+        "x-controller-name": "PostController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PostController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Post PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Post.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Post>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostPartial"
+              }
+            }
+          }
+        },
+        "operationId": "PostController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PostController",
+        "x-operation-name": "find",
+        "tags": [
+          "PostController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Post model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PostWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PostController.find"
+      }
+    },
+    "/users/count": {
+      "get": {
+        "x-controller-name": "UserController",
+        "x-operation-name": "count",
+        "tags": [
+          "UserController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "User.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<User>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UserController.count"
+      }
+    },
+    "/users/{id}/comments": {
+      "post": {
+        "x-controller-name": "UserCommentController",
+        "x-operation-name": "create",
+        "tags": [
+          "UserCommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCommentInUser"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UserCommentController.create"
+      },
+      "patch": {
+        "x-controller-name": "UserCommentController",
+        "x-operation-name": "patch",
+        "tags": [
+          "UserCommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User.Comment PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Comment.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Comment>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UserCommentController.patch"
+      },
+      "get": {
+        "x-controller-name": "UserCommentController",
+        "x-operation-name": "find",
+        "tags": [
+          "UserCommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of User has many Comment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Comment"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UserCommentController.find"
+      },
+      "delete": {
+        "x-controller-name": "UserCommentController",
+        "x-operation-name": "delete",
+        "tags": [
+          "UserCommentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User.Comment DELETE success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Comment.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Comment>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UserCommentController.delete"
+      }
+    },
+    "/users/{id}/posts": {
+      "post": {
+        "x-controller-name": "UserPostController",
+        "x-operation-name": "create",
+        "tags": [
+          "UserPostController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPostInUser"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UserPostController.create"
+      },
+      "patch": {
+        "x-controller-name": "UserPostController",
+        "x-operation-name": "patch",
+        "tags": [
+          "UserPostController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User.Post PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Post.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Post>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UserPostController.patch"
+      },
+      "get": {
+        "x-controller-name": "UserPostController",
+        "x-operation-name": "find",
+        "tags": [
+          "UserPostController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of User has many Post",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UserPostController.find"
+      },
+      "delete": {
+        "x-controller-name": "UserPostController",
+        "x-operation-name": "delete",
+        "tags": [
+          "UserPostController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User.Post DELETE success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Post.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Post>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UserPostController.delete"
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "x-controller-name": "UserController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "UserController"
+        ],
+        "responses": {
+          "204": {
+            "description": "User PUT success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UserController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "UserController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "UserController"
+        ],
+        "responses": {
+          "204": {
+            "description": "User PATCH success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UserController.updateById"
+      },
+      "get": {
+        "x-controller-name": "UserController",
+        "x-operation-name": "findById",
+        "tags": [
+          "UserController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UserController.findById"
+      },
+      "delete": {
+        "x-controller-name": "UserController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "UserController"
+        ],
+        "responses": {
+          "204": {
+            "description": "User DELETE success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "UserController.deleteById"
+      }
+    },
+    "/users": {
+      "post": {
+        "x-controller-name": "UserController",
+        "x-operation-name": "create",
+        "tags": [
+          "UserController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            }
+          }
+        },
+        "operationId": "UserController.create"
+      },
+      "patch": {
+        "x-controller-name": "UserController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "UserController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "User.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<User>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserPartial"
+              }
+            }
+          }
+        },
+        "operationId": "UserController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "UserController",
+        "x-operation-name": "find",
+        "tags": [
+          "UserController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of User model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UserController.find"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Post": {
+        "title": "Post",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "content": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "content"
+        ],
+        "additionalProperties": false
+      },
+      "User": {
+        "title": "User",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "create_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "password",
+          "phone"
+        ],
+        "additionalProperties": false
+      },
+      "Comment": {
+        "title": "Comment",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "text": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "postId": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "NewComment": {
+        "title": "NewComment",
+        "type": "object",
+        "description": "(tsType: Omit<Comment, 'id'>, schemaOptions: { title: 'NewComment', exclude: [ 'id' ] })",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "postId": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Comment, 'id'>"
+      },
+      "UserWithRelations": {
+        "title": "UserWithRelations",
+        "type": "object",
+        "description": "(tsType: UserWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "create_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "posts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostWithRelations"
+            }
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommentWithRelations"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "password",
+          "phone"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "UserWithRelations"
+      },
+      "PostWithRelations": {
+        "title": "PostWithRelations",
+        "type": "object",
+        "description": "(tsType: PostWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "content": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "number"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserWithRelations"
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommentWithRelations"
+            }
+          }
+        },
+        "required": [
+          "content"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PostWithRelations"
+      },
+      "CommentWithRelations": {
+        "title": "CommentWithRelations",
+        "type": "object",
+        "description": "(tsType: CommentWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "text": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "postId": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "number"
+          },
+          "post": {
+            "$ref": "#/components/schemas/PostWithRelations"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserWithRelations"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "CommentWithRelations"
+      },
+      "CommentPartial": {
+        "title": "CommentPartial",
+        "type": "object",
+        "description": "(tsType: Partial<Comment>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "text": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "postId": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Comment>"
+      },
+      "NewCommentInPost": {
+        "title": "NewCommentInPost",
+        "type": "object",
+        "description": "(tsType: @loopback/repository-json-schema#Optional<Omit<Comment, 'id'>, 'postId'>, schemaOptions: { title: 'NewCommentInPost', exclude: [ 'id' ], optional: [ 'postId' ] })",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "postId": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository-json-schema#Optional<Omit<Comment, 'id'>, 'postId'>"
+      },
+      "NewPost": {
+        "title": "NewPost",
+        "type": "object",
+        "description": "(tsType: Omit<Post, 'id'>, schemaOptions: { title: 'NewPost', exclude: [ 'id' ] })",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "content"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Post, 'id'>"
+      },
+      "PostPartial": {
+        "title": "PostPartial",
+        "type": "object",
+        "description": "(tsType: Partial<Post>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "content": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Post>"
+      },
+      "NewCommentInUser": {
+        "title": "NewCommentInUser",
+        "type": "object",
+        "description": "(tsType: @loopback/repository-json-schema#Optional<Omit<Comment, 'id'>, 'userId'>, schemaOptions: { title: 'NewCommentInUser', exclude: [ 'id' ], optional: [ 'userId' ] })",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "postId": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository-json-schema#Optional<Omit<Comment, 'id'>, 'userId'>"
+      },
+      "NewPostInUser": {
+        "title": "NewPostInUser",
+        "type": "object",
+        "description": "(tsType: @loopback/repository-json-schema#Optional<Omit<Post, 'id'>, 'userId'>, schemaOptions: { title: 'NewPostInUser', exclude: [ 'id' ], optional: [ 'userId' ] })",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "content"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository-json-schema#Optional<Omit<Post, 'id'>, 'userId'>"
+      },
+      "NewUser": {
+        "title": "NewUser",
+        "type": "object",
+        "description": "(tsType: Omit<User, 'id'>, schemaOptions: { title: 'NewUser', exclude: [ 'id' ] })",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "create_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "password",
+          "phone"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<User, 'id'>"
+      },
+      "UserPartial": {
+        "title": "UserPartial",
+        "type": "object",
+        "description": "(tsType: Partial<User>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "create_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<User>"
+      },
+      "loopback.Count": {
+        "type": "object",
+        "title": "loopback.Count",
+        "x-typescript-type": "@loopback/repository#Count",
+        "properties": {
+          "count": {
+            "type": "number"
+          }
+        }
+      },
+      "Comment.ScopeFilter": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "Comment.ScopeFilter"
+      },
+      "Comment.IncludeFilter.Items": {
+        "title": "Comment.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Comment.ScopeFilter"
+          }
+        }
+      },
+      "Comment.Filter": {
+        "type": "object",
+        "title": "Comment.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "text": {
+                    "type": "boolean"
+                  },
+                  "created_at": {
+                    "type": "boolean"
+                  },
+                  "updated_at": {
+                    "type": "boolean"
+                  },
+                  "postId": {
+                    "type": "boolean"
+                  },
+                  "userId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "text",
+                    "created_at",
+                    "updated_at",
+                    "postId",
+                    "userId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Comment.Fields"
+          },
+          "include": {
+            "title": "Comment.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Comment>"
+      },
+      "Comment.Filter1": {
+        "type": "object",
+        "title": "Comment.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "Comment.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "text": {
+                    "type": "boolean"
+                  },
+                  "created_at": {
+                    "type": "boolean"
+                  },
+                  "updated_at": {
+                    "type": "boolean"
+                  },
+                  "postId": {
+                    "type": "boolean"
+                  },
+                  "userId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "text",
+                    "created_at",
+                    "updated_at",
+                    "postId",
+                    "userId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Comment.Fields"
+          },
+          "include": {
+            "title": "Comment.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Comment>"
+      },
+      "PingResponse": {
+        "type": "object",
+        "title": "PingResponse",
+        "properties": {
+          "greeting": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "headers": {
+            "type": "object",
+            "properties": {
+              "Content-Type": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "Post.ScopeFilter": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "Post.ScopeFilter"
+      },
+      "Post.IncludeFilter.Items": {
+        "title": "Post.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Post.ScopeFilter"
+          }
+        }
+      },
+      "Post.Filter": {
+        "type": "object",
+        "title": "Post.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "content": {
+                    "type": "boolean"
+                  },
+                  "created_at": {
+                    "type": "boolean"
+                  },
+                  "updated_at": {
+                    "type": "boolean"
+                  },
+                  "userId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "content",
+                    "created_at",
+                    "updated_at",
+                    "userId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Post.Fields"
+          },
+          "include": {
+            "title": "Post.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Post.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Post>"
+      },
+      "Post.Filter1": {
+        "type": "object",
+        "title": "Post.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "Post.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "content": {
+                    "type": "boolean"
+                  },
+                  "created_at": {
+                    "type": "boolean"
+                  },
+                  "updated_at": {
+                    "type": "boolean"
+                  },
+                  "userId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "content",
+                    "created_at",
+                    "updated_at",
+                    "userId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Post.Fields"
+          },
+          "include": {
+            "title": "Post.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Post.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Post>"
+      },
+      "User.ScopeFilter": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "User.ScopeFilter"
+      },
+      "User.IncludeFilter.Items": {
+        "title": "User.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/User.ScopeFilter"
+          }
+        }
+      },
+      "User.Filter": {
+        "type": "object",
+        "title": "User.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "boolean"
+                  },
+                  "email": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "phone": {
+                    "type": "boolean"
+                  },
+                  "create_at": {
+                    "type": "boolean"
+                  },
+                  "updated_at": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "name",
+                    "email",
+                    "password",
+                    "phone",
+                    "create_at",
+                    "updated_at"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "User.Fields"
+          },
+          "include": {
+            "title": "User.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<User>"
+      },
+      "User.Filter1": {
+        "type": "object",
+        "title": "User.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "User.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "boolean"
+                  },
+                  "email": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "phone": {
+                    "type": "boolean"
+                  },
+                  "create_at": {
+                    "type": "boolean"
+                  },
+                  "updated_at": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "name",
+                    "email",
+                    "password",
+                    "phone",
+                    "create_at",
+                    "updated_at"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "User.Fields"
+          },
+          "include": {
+            "title": "User.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<User>"
+      }
+    }
+  }
+}
